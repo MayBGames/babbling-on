@@ -1,0 +1,24 @@
+const generate_reference_blocks = (scene) => {
+  const boxes = [ ]
+  
+  for (let i in [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]) {
+    const box = BABYLON.MeshBuilder.CreateBox(`box${i}`, { }, scene)
+
+    // This is kind of crap.
+    // I just happen to know that the 
+    const x   = Math.random() * 200 - 100
+    const z   = Math.random() * 200 - 100
+
+    box.position = new BABYLON.Vector3(x, 0, z)
+
+    box.checkCollisions = true
+
+    box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0 }, scene)
+
+    boxes.push(box)
+  }
+
+  return boxes
+}
+
+export { generate_reference_blocks }

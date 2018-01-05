@@ -16,6 +16,8 @@ import { create_player } from '/src/player.js'
 import { create_ground } from '/src/ground.js'
 import { create_sun    } from '/src/sun.js'
 
+import { generate_reference_blocks } from '/src/reference_blocks.js'
+
 const canvas = document.getElementsByTagName('canvas')[0]
 
 canvas.style.width  = window.innerWidth  + 'px'
@@ -26,13 +28,16 @@ window.addEventListener('DOMContentLoaded', () => {
   const scene  = create_scene(engine)
   const me     = create_player(scene)
   const plane  = create_ground(scene)
-
-  create_sun(scene, [ me ])
+  const boxes  = generate_reference_blocks(scene)
   
   init_controls(scene, me)
 
   scene.activeCamera = create_camera(canvas, scene, me)
 
+  boxes.push(me)
+
+  create_sun(scene, boxes)
+  
   canvas.focus()
 
   engine.runRenderLoop(() => {
