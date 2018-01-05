@@ -5,7 +5,7 @@ const generate_reference_blocks = (scene) => {
     const box = BABYLON.MeshBuilder.CreateBox(`box${i}`, { }, scene)
 
     // This is kind of crap.
-    // I just happen to know that the 
+    // I just happen to know that the size of the plane (ground) is 200 x 200
     const x   = Math.random() * 200 - 100
     const z   = Math.random() * 200 - 100
 
