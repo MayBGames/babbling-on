@@ -12,11 +12,16 @@ let STOP_DELAY   = 50
 
 const MOVE = { Z: 0, Y: 0, X: 0 }
 
+const FORWARD  = 'w'
+const BACKWARD = 's'
+const LEFT     = 'a'
+const RIGHT    = 'd'
+
 const DIRECTION = {
-  t: (stop) => MOVE.Z = stop === 'STOP' ? 0 : neg(),
-  h: (stop) => MOVE.X = stop === 'STOP' ? 0 : neg(),
-  g: (stop) => MOVE.Z = stop === 'STOP' ? 0 : pos(),
-  f: (stop) => MOVE.X = stop === 'STOP' ? 0 : pos()
+  [FORWARD]:  (stop) => MOVE.Z = stop === 'STOP' ? 0 : neg(),
+  [BACKWARD]: (stop) => MOVE.Z = stop === 'STOP' ? 0 : pos(),
+  [LEFT]:     (stop) => MOVE.X = stop === 'STOP' ? 0 : pos(),
+  [RIGHT]:    (stop) => MOVE.X = stop === 'STOP' ? 0 : neg()
 }
 
 const process_player_move = (me) => {
@@ -61,14 +66,14 @@ const register_jump_handler = (scene, me) => {
 }
 
 const init_controls = (scene, me) => {
-  [ 't', 'g', 'f', 'h' ].forEach((key) => {
+  for (let key of Object.keys(DIRECTION)) {
     register_move_action_handler(key, scene, me)
     
     register_action(KEY_UP, key, scene, () => {
       if (KEYS_UP[key] === undefined)
         KEYS_UP[key] = Date.now()
     })
-  })
+  }
 
   register_jump_handler(scene, me)
 }
