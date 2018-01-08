@@ -13,10 +13,10 @@ let STOP_DELAY   = 50
 const MOVE = { Z: 0, Y: 0, X: 0 }
 
 const DIRECTION = {
-  t: (stop) => MOVE.Z = stop === 'STOP' ? 0 : pos(),
-  h: (stop) => MOVE.X = stop === 'STOP' ? 0 : pos(),
-  g: (stop) => MOVE.Z = stop === 'STOP' ? 0 : neg(),
-  f: (stop) => MOVE.X = stop === 'STOP' ? 0 : neg()
+  t: (stop) => MOVE.Z = stop === 'STOP' ? 0 : neg(),
+  h: (stop) => MOVE.X = stop === 'STOP' ? 0 : neg(),
+  g: (stop) => MOVE.Z = stop === 'STOP' ? 0 : pos(),
+  f: (stop) => MOVE.X = stop === 'STOP' ? 0 : pos()
 }
 
 const process_player_move = (me) => {
