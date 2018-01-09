@@ -20,9 +20,6 @@ import { generate_reference_blocks } from '/src/reference_blocks.js'
 
 const canvas = document.getElementsByTagName('canvas')[0]
 
-canvas.style.width  = window.innerWidth  + 'px'
-canvas.style.height = window.innerHeight + 'px'
-
 window.addEventListener('DOMContentLoaded', () => {
   const engine = new BABYLON.Engine(canvas, true)
   const scene  = create_scene(engine)
