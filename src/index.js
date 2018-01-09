@@ -40,4 +40,21 @@ window.addEventListener('DOMContentLoaded', () => {
     
     scene.render()
   })
+
+  let original_canvas_width  = canvas.width
+  let original_canvas_height = canvas.height
+
+  document.onwebkitfullscreenchange = (event) => {
+    if (engine.isFullscreen === false)
+      engine.setSize(original_canvas_width, original_canvas_height)
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.which === 13 && engine.isFullscreen === false) {
+      engine.switchFullscreen(true)
+      engine.setSize(screen.width, screen.height)
+
+      canvas.focus()
+    }
+  }, false)
 })
