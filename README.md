@@ -26,7 +26,7 @@ Pretty much every [commit](https://github.com/MayBGames/babbling-on/commits/mast
 
 ### Commit comments
 
-I'd recommend checking this repo often as I'm going to be adding comments to specific lines of code in commits. My goal here is to more clearly and closely connect the explanations in the commit messages to the code.
+I'd recommend :star:ing this repo and checking back often as I'm going to be adding comments to specific lines of code in commits. My goal here is to more clearly and closely connect the explanations in the commit messages to the code.
 
 Feedback/Contributions
 ======================
