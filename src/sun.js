@@ -6,7 +6,7 @@ const create_sun = (scene, me, more) => {
 
   sun.autoUpdateExtends = false
   
-  const shadow_generator = new BABYLON.ShadowGenerator(8192, sun)
+  const shadow_generator = new BABYLON.ShadowGenerator(4092, sun)
 
   shadow_generator.getShadowMap().renderList.push(me)
 
