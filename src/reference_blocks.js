@@ -2,7 +2,10 @@ const generate_reference_blocks = (scene) => {
   const boxes = [ ]
   
   for (let i in [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]) {
-    const box = BABYLON.MeshBuilder.CreateBox(`box${i}`, { }, scene)
+    const box = BABYLON.MeshBuilder.CreateBox(`box_${i}`, { }, scene)
+
+    box.material              = new BABYLON.StandardMaterial(`box_mat_${i}`, scene)
+    box.material.diffuseColor = new BABYLON.Color3(1, 1, 0)
 
     // This is kind of crap.
     // It really shouldn't be hardcoded.
