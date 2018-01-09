@@ -1,7 +1,6 @@
 const create_player = (scene) => {
   const player = BABYLON.MeshBuilder.CreateCylinder('player', { }, scene)
 
-  player.ellipsoid             = new BABYLON.Vector3(1.3, 2, 1.3)
   player.material              = new BABYLON.StandardMaterial('player_mat', scene)
   player.material.diffuseColor = new BABYLON.Color3(1, 0.75, 1)
 
