@@ -1,18 +1,19 @@
-const create_sun = (scene, casters) => {
-  const dir_light = new BABYLON.DirectionalLight('sun', new BABYLON.Vector3(-1, -2, -1), scene)
-  const shadow    = new BABYLON.ShadowGenerator(1024, dir_light)
+const create_sun = (scene, me, more) => {
+  const sun = new BABYLON.DirectionalLight('sun', new BABYLON.Vector3(-1, -2, -1), scene)
 
-  dir_light.position  = new BABYLON.Vector3(20, 40, 20)
-  dir_light.intensity = 0.5
+  sun.position  = new BABYLON.Vector3(20, 40, 20)
+  sun.intensity = 0.5
 
-  for (let caster of casters)
-    shadow.addShadowCaster(caster)
+  sun.autoUpdateExtends = false
   
-  shadow.useExponentialShadowMap = true
+  const shadow_generator = new BABYLON.ShadowGenerator(8192, sun)
 
-  return {
-    light:  dir_light,
-    shadow: shadow
+  shadow_generator.getShadowMap().renderList.push(me)
+
+  for (let m of more) {
+    shadow_generator.addShadowCaster(m)
+
+    m.receiveShadows = true
   }
 }
 

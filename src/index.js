@@ -34,9 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   scene.activeCamera = create_camera(canvas, scene, me)
 
-  boxes.push(me)
-
-  create_sun(scene, boxes)
+  create_sun(scene, me, boxes)
   
   canvas.focus()
 
