@@ -26,7 +26,7 @@ Pretty much every [commit](https://github.com/MayBGames/babbling-on/commits/mast
 
 ### Commit diff comments
 
-I'd recommend :star:ing this repo and checking back often as I'm going through and adding comments to specific lines of code in commit diffs. My goal here is to expand upon the explanations the commit messages; adding details about why I did things the way I did, general project structure suggestions, and random thoughts as close to the code as possible without adding comments to source files.
+I'd recommend :star:ing this repo and checking back often as I'm going through and adding comments to specific lines of code in commit diffs. My goal here is to expand upon the explanations in the commit messages; adding details about why I did things the way I did, general project structure suggestions, and random thoughts as close to the code as possible without adding comments to source files.
 
 Feedback/Contributions
 ======================
