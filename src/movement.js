@@ -68,10 +68,6 @@ const init_controls = (scene, me) => {
 }
 
 export {
-  KEYS_DOWN,
-  KEYS_UP,
-  MOVE_DIVISOR,
-  STOP_DELAY,
   MOVE,
   process_player_move,
   init_controls
