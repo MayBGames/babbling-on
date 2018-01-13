@@ -14,7 +14,4 @@ const create_scene = (engine) => {
   return scene
 }
 
-export {
-  GRAVITY,
-  create_scene
-}
+export { create_scene }
