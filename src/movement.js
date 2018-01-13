@@ -44,15 +44,6 @@ const stop_player_move = (key) => {
   KEYS_UP[key]   = undefined
 }
 
-const register_jump_handler = (scene, me) => {
-  scene.actionManager.registerAction(
-    new BABYLON.ExecuteCodeAction(
-      { trigger: KEY_DOWN, parameter: ' ' },
-      () => me.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 8, 0), me.getAbsolutePosition())
-    )
-  )
-}
-
 const init_controls = (scene, me) => {
   for (let key of Object.keys(DIRECTION)) {
     register_action(KEY_DOWN, key, scene, () => {
@@ -71,7 +62,9 @@ const init_controls = (scene, me) => {
     })
   }
 
-  register_jump_handler(scene, me)
+  register_action(KEY_DOWN, ' ', scene, () => {
+    me.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 8, 0), me.getAbsolutePosition())
+  })
 }
 
 export {
