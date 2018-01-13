@@ -44,18 +44,6 @@ const stop_player_move = (key) => {
   KEYS_UP[key]   = undefined
 }
 
-const register_move_action_handler = (key, scene, me) => {
-  register_action(KEY_DOWN, key, scene, () => {
-    if (KEYS_DOWN[key] === undefined) {
-      KEYS_DOWN[key] = Date.now()
-
-      DIRECTION[key]('GO')
-    }
-    
-    process_player_move(me)
-  })
-}
-
 const register_jump_handler = (scene, me) => {
   scene.actionManager.registerAction(
     new BABYLON.ExecuteCodeAction(
@@ -67,7 +55,15 @@ const register_jump_handler = (scene, me) => {
 
 const init_controls = (scene, me) => {
   for (let key of Object.keys(DIRECTION)) {
-    register_move_action_handler(key, scene, me)
+    register_action(KEY_DOWN, key, scene, () => {
+      if (KEYS_DOWN[key] === undefined) {
+        KEYS_DOWN[key] = Date.now()
+
+        DIRECTION[key]('GO')
+      }
+
+      process_player_move(me)
+    })
     
     register_action(KEY_UP, key, scene, () => {
       if (KEYS_UP[key] === undefined)
