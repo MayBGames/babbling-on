@@ -1,5 +1,6 @@
 import {
   init_controls,
+  process_pointer_move,
   process_player_move,
   MOVE
 } from '/src/movement.js'
@@ -44,9 +45,16 @@ window.addEventListener('DOMContentLoaded', () => {
   let original_canvas_width  = canvas.width
   let original_canvas_height = canvas.height
 
+  const pointer_move_handler = process_pointer_move(scene.activeCamera, me)
+
   document.onwebkitfullscreenchange = (event) => {
-    if (engine.isFullscreen === false)
+    if (engine.isFullscreen === false) {
       engine.setSize(original_canvas_width, original_canvas_height)
+
+      document.removeEventListener('mousemove', pointer_move_handler, false)
+    } else if (engine.isFullscreen === true) {
+      document.addEventListener('mousemove', pointer_move_handler, false)
+    }
   }
 
   document.addEventListener('keydown', (e) => {

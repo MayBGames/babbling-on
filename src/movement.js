@@ -67,8 +67,17 @@ const init_controls = (scene, me) => {
   })
 }
 
+
+const process_pointer_move = (camera, me) => {
+  return (e) => {
+    me.rotation.y       += parseFloat(e.movementX / screen.width)
+    camera.heightOffset += parseFloat(e.movementY / screen.height)
+  }
+}
+
 export {
   MOVE,
+  process_pointer_move,
   process_player_move,
   init_controls
 }
