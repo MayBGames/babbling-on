@@ -24,25 +24,10 @@ const DIRECTION = {
   [RIGHT]:    (stop) => MOVE.X = stop === 'STOP' ? 0 : neg()
 }
 
-const process_player_move = (me) => {
-  for (let key in KEYS_UP)
-    if (KEYS_UP[key] !== undefined && Date.now() - KEYS_UP[key] > STOP_DELAY)
-      stop_player_move(key)
-
-  me.moveWithCollisions(new BABYLON.Vector3(MOVE.X, MOVE.Y, MOVE.Z))
-}
-
 const compute_direction = (direction, power) => parseFloat(Math[direction](power)) / MOVE_DIVISOR
 
 const pos = () => compute_direction('cos',  1)
 const neg = () => compute_direction('sin', -1)
-
-const stop_player_move = (key) => {
-  DIRECTION[key]('STOP')
-
-  KEYS_DOWN[key] = undefined
-  KEYS_UP[key]   = undefined
-}
 
 const init_controls = (scene, me) => {
   for (let key of Object.keys(DIRECTION)) {
@@ -67,6 +52,20 @@ const init_controls = (scene, me) => {
   })
 }
 
+const stop_player_move = (key) => {
+  DIRECTION[key]('STOP')
+
+  KEYS_DOWN[key] = undefined
+  KEYS_UP[key]   = undefined
+}
+
+const process_player_move = (me) => {
+  for (let key in KEYS_UP)
+    if (KEYS_UP[key] !== undefined && Date.now() - KEYS_UP[key] > STOP_DELAY)
+      stop_player_move(key)
+
+  me.moveWithCollisions(new BABYLON.Vector3(MOVE.X, MOVE.Y, MOVE.Z))
+}
 
 const process_pointer_move = (camera, me) => {
   return (e) => {
