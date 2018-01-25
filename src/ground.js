@@ -1,5 +1,5 @@
 const create_ground = (scene) => {
-  const ground = BABYLON.MeshBuilder.CreateBox('ground', { width: 200.0 , depth: 200.0 }, scene)
+  const ground = BABYLON.MeshBuilder.CreateBox('ground', { width: 2000.0 , depth: 2000.0 }, scene)
 
   ground.receiveShadows        = true
   ground.material              = new BABYLON.StandardMaterial('ground_mat', scene)
