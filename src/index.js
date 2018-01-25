@@ -1,3 +1,4 @@
+import { init_controls } from '/src/movement.js'
 import { create_camera } from '/src/camera.js'
 import { create_scene  } from '/src/scene.js'
 import { create_player } from '/src/player.js'
@@ -15,6 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const plane  = create_ground(scene)
   const boxes  = generate_reference_blocks(scene)
   
+  init_controls(engine, scene, me)
 
   scene.activeCamera = create_camera(canvas, scene, me)
 
@@ -22,4 +24,5 @@ window.addEventListener('DOMContentLoaded', () => {
   
   canvas.focus()
 
+  engine.runRenderLoop(() => scene.render())
 })
