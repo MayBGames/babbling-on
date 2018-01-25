@@ -10,7 +10,7 @@ import { generate_reference_blocks } from '/src/reference_blocks.js'
 const canvas = document.getElementsByTagName('canvas')[0]
 
 window.addEventListener('DOMContentLoaded', () => {
-  const engine = new BABYLON.Engine(canvas, true)
+  const engine = new BABYLON.Engine(canvas, true, null, false)
   const scene  = create_scene(engine)
   const me     = create_player(scene)
   const plane  = create_ground(scene)
