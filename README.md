@@ -111,7 +111,9 @@ http {
  $ sudo nginx
  ```
 
- Now you can navigate to http://localhost:4242 in your browser (currently only [Chrome](https://www.google.com/chrome/browser/features.html) and [Safari](https://support.apple.com/downloads/safari) are supported - thanks vendor prefixes) and see the project running!
+##### yay!
+
+ Now you can navigate to http://localhost:4242 in your browser (_currently only [Chrome](https://www.google.com/chrome/browser/features.html) and [Safari](https://support.apple.com/downloads/safari) are supported; thanks vendor prefixes_) and see the project running!
 
 Feedback/Contributions
 ======================
