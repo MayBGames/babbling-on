@@ -48,6 +48,7 @@ let frames_per_second = 0
 
 let last_mouse_movement = 0
 
+let move_by = 0
 
 const init_controls = (engine, scene, me) => {
   for (let key of DIRECTIONS) {
@@ -148,7 +149,28 @@ const init_controls = (engine, scene, me) => {
       character.rotation = speed / (turning_radius.current * frames_per_second)
 
       me.rotate(BABYLON.Axis.Y, character.rotation, BABYLON.Space.WORLD)
+
+      move_by += character.rotation
     }
+
+    let temp_z = 0
+    let temp_x = 0
+
+    if (distance_per_second.z !== 0) {
+      const distance_this_frame = parseFloat(distance_per_second.z / frames_per_second)
+
+      temp_z += parseFloat(Math.cos(parseFloat(move_by))) * distance_this_frame
+      temp_x += parseFloat(Math.sin(parseFloat(move_by))) * distance_this_frame
+    }
+
+    if (distance_per_second.x !== 0) {
+      const distance_this_frame = parseFloat(distance_per_second.x / frames_per_second)
+
+      temp_z += (parseFloat(Math.sin(parseFloat(-move_by))) * distance_this_frame) * (Math.PI / 4)
+      temp_x += (parseFloat(Math.cos(parseFloat(-move_by))) * distance_this_frame) * (Math.PI / 4)
+    }
+
+    me.moveWithCollisions(new BABYLON.Vector3(temp_x, 0, temp_z))
   })
 
   register_action(KEY_DOWN, ' ', scene, () => {
