@@ -24,12 +24,12 @@ To get the best bang for your learning buck, I'd recommend looking through the [
 
 ### Commits
 
-Every [commit](https://github.com/MayBGames/babbling-on/commits/master) has valuable details regarding what was done and why in the commit message. Many commits are linked to Tasks as well (_though not all - some commits are house cleaning/guality of like changes that don't belong to a task_). Some commits also have commit diff comments. These comments go into much greater detail regarding specific lines of code; how they function, why they were added/removed/changed, etc.
+Every [commit](https://github.com/MayBGames/babbling-on/commits/master) has valuable details regarding what was done and why in the commit message. Many commits are linked to Tasks as well (_though not all - some commits are house cleaning/guality of life changes that don't belong to a task_). Some commits also have commit diff comments. These comments go into much greater detail regarding specific lines of code; how they function, why they were added/removed/changed, etc.
 
 Setup
 =====
 
-Babbling On uses javascript [ES6 modules](http://2ality.com/2014/09/es6-modules-final.html#ecmascript-6-modules) (the link explains the benefits). While ES6 modules are awesome, they come with one caveat (it's actually a good thing security-wise, but can be a bit of a pain): they are fetched using [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). This means a server needs to be installed, configured, and running locally.
+Babbling On uses javascript [ES6 modules](http://2ality.com/2014/09/es6-modules-final.html#ecmascript-6-modules) (the link explains the benefits). While ES6 modules are awesome, they come with one caveat (it's actually a good thing security-wise, but can be a bit of a pain): they are fetched using [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests. This means a server needs to be installed, configured, and running locally.
 
 ### Install, configure, and run [nginx](https://nginx.org/en/)
 
@@ -38,7 +38,15 @@ Babbling On uses javascript [ES6 modules](http://2ality.com/2014/09/es6-modules-
 On a Mac, using [Homebrew](https://brew.sh/)
 
 ```sh
+$ brew update
 $ brew install nginx
+```
+
+On Ubuntu using [apt-get](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04) (_link contains more detailed instructions_)
+
+```sh
+$ sudo apt-get update
+$ sudo apt-get install nginx
 ```
 
 ##### configure
@@ -49,7 +57,7 @@ Once this completes, open nginx's root config file
 $ vim /usr/local/etc/nginx/nginx.conf
 ```
 
-**NOTE** If you're not familiar with [vim](http://www.vim.org/), you can also open the nginx config file in the text editor of your choice (_on macOS_) by using
+**NOTE** If you're not familiar with [vim](http://www.vim.org/), you can also open the nginx config file in your default text editor (_on macOS_) by using
 
 ```sh
 $ open /usr/local/etc/nginx/nginx.conf
@@ -78,14 +86,15 @@ http {
 
         location / {
             if ($request_method ~* "(GET|POST)") {
-              add_header "Access-Control-Allow-Origin"  *;
+                add_header "Access-Control-Allow-Origin"  *;
             }
 
             if ($request_method = OPTIONS ) {
-              add_header "Access-Control-Allow-Origin"  *;
-              add_header "Access-Control-Allow-Methods" "GET, POST, OPTIONS, HEAD";
-              add_header "Access-Control-Allow-Headers" "Authorization, Origin, X-Requested-With, Content-Type, Accept";
-              return 200;
+                add_header "Access-Control-Allow-Origin"  *;
+                add_header "Access-Control-Allow-Methods" "GET, POST, OPTIONS, HEAD";
+                add_header "Access-Control-Allow-Headers" "Authorization, Origin, X-Requested-With, Content-Type, Accept";
+              
+                return 200;
             }
 
             index  index.html;
@@ -102,7 +111,7 @@ http {
  $ sudo nginx
  ```
 
- Now you can navigate to http://localhost:4242 and see the project running in your browser!
+ Now you can navigate to http://localhost:4242 in your browser (currently only [Chrome](https://www.google.com/chrome/browser/features.html) and [Safari](https://support.apple.com/downloads/safari) are supported - thanks vendor prefixes) and see the project running!
 
 Feedback/Contributions
 ======================
