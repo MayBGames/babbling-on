@@ -51,7 +51,7 @@ $ sudo apt-get install nginx
 
 ##### configure
 
-Once this completes, open nginx's root config file
+Once the install completes, open nginx's root config file
 
 ```sh
 $ vim /usr/local/etc/nginx/nginx.conf
