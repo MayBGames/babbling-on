@@ -170,6 +170,5 @@ const process_pointer_move = (scene) => {
 }
 
 export {
-  process_pointer_move,
   init_controls
 }
