@@ -126,18 +126,6 @@ const init_controls = (engine, scene, me) => {
       }
     }
 
-    if (distance_per_second.z !== 0) {
-      const distance_this_frame = distance_per_second.z / frames_per_second
-
-      me.translate(BABYLON.Axis.Z, distance_this_frame, BABYLON.Space.LOCAL)
-    }
-
-    if (distance_per_second.x !== 0) {
-      const distance_this_frame = distance_per_second.x / frames_per_second
-
-      me.translate(BABYLON.Axis.X, distance_this_frame, BABYLON.Space.LOCAL)
-    }
-
     if (last_mouse_movement !== mouse_movement.x) {
       rotation.this_frame  = ((mouse_movement.x * 25) * 0.00001) / Math.PI
       rotation.total      += rotation.this_frame
