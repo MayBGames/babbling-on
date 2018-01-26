@@ -1,30 +1,70 @@
-Looking into [Babylon.js](https://www.babylonjs.com/)! :metal:
-=======================
-
-I've worked with Unity and dipped my toe into Unreal.
-
-I wanted something I could use to quickly prototype ideas. Something with minimal setup requirements and the shortest path-to-output possible. After researching things quite a bit I settled on [Babylon.js](https://www.babylonjs.com/).
-
-### Why?
+Making a game with [Babylon.js](https://www.babylonjs.com/)! :metal:
+===============================
 
 I :heart: javascript. A lot.
 
-I also :heart: the idea of running full-fledged, high performance 3D code in a browser without the need for any plugins.
+_"Yeah, so do I..."_ I hear you saying. _"But, I mean... can you really make a game with javascript?"_
 
-WebGL is the way to go for super performant 3D in a browser, and Babylon.js seems a good choice for working with WebGL.
+**ABSOLUTELY**
+
+_"Whoa!"_ You say. _"I want to do that! How do I do that?"_
+
+Read on :sunglasses:
+
+### So... what is this, exactly?
+
+This is kind of a new concept for tutorials. Instead of using blog posts or a series of videos to teach game development with Babylong.js, this repo teaches using code, commit comments, a GitHub Project with task cards, and inline commit diff comments (_comments about specific lines in a commit - they're super awesome, you'll see :thumbsup:_).
+
+The idea is that this repo teaches by showing.
+
+1. What are best practices got game development? **Look at the repo**
+2. How do I do ____ with lighing in Babylon.js? **Look at the repo**
+3. What does the process of making a game look like? **Look at the repo**
+
+##### why Babylon.js?
+
+I've worked with Unity and dipped my toe into Unreal.
+
+I wanted something I could use to quickly prototype ideas. Something with minimal setup requirements and the shortest path-to-output possible. After researching things quite a bit I settled on Babylon.js.
 
 I'm also much more comfortable in a code-based environment than a gui environment like Unreal or Unity.
+
+##### why... _this_?
+
+I've read/watched a lot of tutorials in my career consistantly felt like something was off. The education felt too far from the code.
+
+This repo is my attempt to get the education closer to the code.
+
+I'm not sure how it will go, but so far it feels pretty good :smile:
 
 Structure
 =========
 
+### Topic branches
+
+The idea is to add branches for specific features/sections of Babylon.js. So, for example, a branch would be created for **lighting** or **texturing** etc. Each branch would go into detail on the in general and related to the game being built. All topic branches will be merged back into `master` when work on them has been completed.
+
+### Special branches
+
+Occasionally branches may be created for a special purpose. One example is the `stl-ggj-2018` branch for the St Louis Global Game Jam 2018. Any such branch will contain only work for that event/occasion/need. Special branches may be merged back into `master`. That decision will will be made on a case-by-case basic.
+
+### Projects
+
+Each branch will have an associated [GitHub Project](https://help.github.com/articles/about-project-boards/). Each Project will have one or more Tasks.
+
 ### Tasks
 
-To get the best bang for your learning buck, I'd recommend looking through the [Project Tasks](https://github.com/MayBGames/babbling-on/projects/1). The Tasks (_Cards in GitHub parlance_) in the **Done** column are sorted in newest-to-oldest completion order.
+Tasks represent work that needs to be done. Tasks have tags specifying how they add value to the Project.
+
+A task has three stages:
+
+1. **To Do**: This is the stage all tasks are added to. Tasks in this stage need to be worked on but have not been started.
+2. **In Progress**: This is the stage for all tasks that are currently being worked on, but are not yet complete.
+3. **Done**: This stage signifies that a task is complete and requires no additional work.
 
 ### Commits
 
-Every [commit](https://github.com/MayBGames/babbling-on/commits/master) has valuable details regarding what was done and why in the commit message. Many commits are linked to Tasks as well (_though not all - some commits are house cleaning/guality of life changes that don't belong to a task_). Some commits also have commit diff comments. These comments go into much greater detail regarding specific lines of code; how they function, why they were added/removed/changed, etc.
+Every [commit](https://github.com/MayBGames/babbling-on/commits/master) has valuable details regarding what was done and why in the commit message. Sone commits are linked to Tasks as well (_though not all - some commits are house cleaning/guality of life changes that don't belong to a task_). Some commits also have commit diff comments. These comments go into much greater detail regarding specific lines of code; how they function, why they were added/removed/changed, etc.
 
 Setup
 =====
@@ -81,7 +121,7 @@ http {
     charset utf-8;
 
     server {
-        listen       4242; // Order 66 :-)
+        listen       4242; # Order 66 :-)
         server_name  localhost;
 
         location / {
@@ -120,4 +160,4 @@ Feedback/Contributions
 
 I'd love to hear what you think - good or bad! Feel free to comment on open issues, open your own issues, fork the repo, make changes you'd like to see, and send pull requests!
 
-Thanks, and I hope this repo helps you wrap your head around [Babylon.js](https://www.babylonjs.com/)! :metal:
+Thanks, and I hope this repo helps you wrap your head around [Babylon.js](https://www.babylonjs.com/) and game dev in general! :metal:
