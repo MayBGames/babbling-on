@@ -40,8 +40,9 @@ const character = {
 }
 
 const distance_per_second = {
-  z: 0,
-  x: 0
+  x: 0,
+  y: 0,
+  z: 0
 }
 
 let frames_per_second = 0
@@ -49,6 +50,14 @@ let frames_per_second = 0
 let last_mouse_movement = 0
 
 let move_by = 0
+
+const jump = {
+  base:     undefined,
+  crest:    undefined,
+  position: 0,
+  rising:   false,
+  falling:  false
+}
 
 const init_controls = (engine, scene, me) => {
   for (let key of DIRECTIONS) {
@@ -62,8 +71,6 @@ const init_controls = (engine, scene, me) => {
         keys_down[key] = undefined
     })
   }
-
-  me.position = new BABYLON.Vector3(0, 0, -50)
 
   const canvas = document.getElementsByTagName('canvas')[0]
 
@@ -157,34 +164,66 @@ const init_controls = (engine, scene, me) => {
     let temp_x = 0
 
     if (distance_per_second.z !== 0) {
-      const distance_this_frame = parseFloat(distance_per_second.z / frames_per_second)
+      const distance_this_frame = parseFloat(-distance_per_second.z / frames_per_second)
 
-      temp_z += parseFloat(Math.cos(parseFloat(move_by))) * distance_this_frame
-      temp_x += parseFloat(Math.sin(parseFloat(move_by))) * distance_this_frame
+      temp_z += Math.cos(move_by) * distance_this_frame
+      temp_x += Math.sin(move_by) * distance_this_frame
     }
 
     if (distance_per_second.x !== 0) {
-      const distance_this_frame = parseFloat(distance_per_second.x / frames_per_second)
+      const distance_this_frame = parseFloat(-distance_per_second.x / frames_per_second)
 
       temp_z += (parseFloat(Math.sin(parseFloat(-move_by))) * distance_this_frame) * (Math.PI / 4)
       temp_x += (parseFloat(Math.cos(parseFloat(-move_by))) * distance_this_frame) * (Math.PI / 4)
     }
 
-    me.moveWithCollisions(new BABYLON.Vector3(temp_x, 0, temp_z))
+    if (jump.rising === true || jump.falling === true) {
+      distance_per_second.y = Math.abs(jump.crest - jump.base) * 0.25
+
+      const distance_this_frame = parseFloat(distance_per_second.y / (frames_per_second * 0.6))
+      const vertical_movement   = Math.abs(jump.crest - jump.base) * distance_this_frame
+
+      if (jump.rising === true) {
+        if (me.position.y < jump.crest) {
+          jump.position += vertical_movement
+        } else {
+          jump.rising  = false
+          jump.falling = true
+        }
+      } else if (jump.falling === true) {
+        if (me.position.y - jump.base > 0.01) {
+          jump.position -= vertical_movement
+        } else {
+          jump.base     = undefined
+          jump.crest    = undefined
+          jump.position = 0
+          jump.rising   = false
+          jump.falling  = false
+        }
+      }
+    }
+
+    me.moveWithCollisions(new BABYLON.Vector3(temp_x, jump.position, temp_z))
   })
 
   register_action(KEY_DOWN, ' ', scene, () => {
-    me.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 8, 0), me.getAbsolutePosition())
+    if (jump.base === undefined) {
+      jump.base     = me.getAbsolutePosition().y
+      jump.crest    = jump.base + 4
+      jump.position = 0
+      jump.rising   = true
+      jump.falling  = false
+    }
   })
 }
 
 const process_pointer_move = (scene) => {
   return (e) => {
-    mouse_movement.y = e.movementY
-    mouse_movement.x = e.movementX
+    mouse_movement.y = e.movementY * 0.125
+    mouse_movement.x = e.movementX * 0.25
 
     if (e.movementY !== 0) {
-      const x_rotate_amount = parseFloat(e.movementY / (180 * Math.PI))
+      const x_rotate_amount = parseFloat(mouse_movement.y / (180 * Math.PI))
 
       scene.activeCamera.heightOffset += x_rotate_amount
     }
