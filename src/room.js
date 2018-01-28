@@ -21,6 +21,8 @@ const create_room = (scene) => {
     material.bumpTexture     = new BABYLON.Texture('/assets/concrete bump.png', scene)
     material.specularTexture = new BABYLON.Texture('/assets/concrete bump.png', scene)
 
+    material.maxSimultaneousLights = 10
+
     material.useParallax = true
     material.useParallaxOcclusion = true
     material.parallaxScaleBias = 0.1

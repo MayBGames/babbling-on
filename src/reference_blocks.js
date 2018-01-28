@@ -14,6 +14,7 @@ const generate_reference_blocks = (scene) => {
 
     box.material              = new BABYLON.StandardMaterial(`box_mat_${i}`, scene)
     box.material.diffuseColor = new BABYLON.Color3(1, 1, 0)
+    box.material.ambientColor = new BABYLON.Color3(0.3, 0.3, 0)
 
     // This is kind of crap.
     // It really shouldn't be hardcoded.

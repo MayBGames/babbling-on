@@ -162,6 +162,7 @@ const init_controls = (engine, scene, me) => {
 
     let temp_z = 0
     let temp_x = 0
+    let temp_y = 0
 
     if (distance_per_second.z !== 0) {
       const distance_this_frame = parseFloat(-distance_per_second.z / frames_per_second)
@@ -186,6 +187,7 @@ const init_controls = (engine, scene, me) => {
       if (jump.rising === true) {
         if (me.position.y < jump.crest) {
           jump.position += vertical_movement
+          temp_y = jump.position
         } else {
           jump.rising  = false
           jump.falling = true
@@ -193,6 +195,7 @@ const init_controls = (engine, scene, me) => {
       } else if (jump.falling === true) {
         if (me.position.y - jump.base > 0.01) {
           jump.position -= vertical_movement
+          temp_y = jump.position
         } else {
           jump.base     = undefined
           jump.crest    = undefined
@@ -201,9 +204,11 @@ const init_controls = (engine, scene, me) => {
           jump.falling  = false
         }
       }
+    } else {
+      temp_y = -9.81 / frames_per_second
     }
 
-    me.moveWithCollisions(new BABYLON.Vector3(temp_x, jump.position, temp_z))
+    me.moveWithCollisions(new BABYLON.Vector3(temp_x, temp_y, temp_z))
   })
 
   register_action(KEY_DOWN, ' ', scene, () => {
