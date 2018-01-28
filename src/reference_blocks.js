@@ -29,8 +29,6 @@ const generate_reference_blocks = (scene) => {
     box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0 }, scene)
 
     boxes.push(box)
-
-    console.log(box.getAbsolutePosition())
   }
 
   return boxes

@@ -3,14 +3,16 @@ import { create_camera } from '/src/camera.js'
 import { create_scene  } from '/src/scene.js'
 import { create_player } from '/src/player.js'
 import { create_room   } from '/src/room.js'
+import { create_word_cube } from '/src/word_cube.js'
 
 import {
   create_point_lights,
-  create_four_lights,
   create_ambient_light
 } from '/src/lights.js'
 
 import { generate_reference_blocks } from '/src/reference_blocks.js'
+
+import { letters } from '/src/letters.js'
 
 const canvas = document.getElementsByTagName('canvas')[0]
 
@@ -23,28 +25,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const blocks = generate_reference_blocks(scene)
 
+  create_word_cube(new BABYLON.Color3(80, 1.5, 80), scene)
+
   for (let b in blocks)
     room[b] = blocks[b]
+
+  scene.ambientColor = new BABYLON.Color3(0.5, 0.5, 0.5)
   
   init_controls(engine, scene, me)
 
   scene.activeCamera = create_camera(canvas, scene, me)
 
-  // create_ambient_light(scene)
-  create_point_lights(scene, me, room)
-  create_four_lights(scene, me, room)
-  
   canvas.focus()
 
-  const box = BABYLON.MeshBuilder.CreateBox('box', { height: 1, width: 1, depth: 1 }, scene)
+  create_point_lights(scene, me, room)
 
-  box.position        = new BABYLON.Vector3(-5, 1.5, -5)
-  box.checkCollisions = true
-
-  box.material              = new BABYLON.StandardMaterial('box_material', scene)
-  box.material.diffuseColor = new BABYLON.Color3(0.5, 0.75, 1)
-
-  me.onCollide = (mesh) => box.dispose()
+  // me.onCollide = (mesh) => box.visibility = 0
 
   engine.runRenderLoop(() => scene.render())
 })
