@@ -30,7 +30,7 @@ const animate_player = (me, scene) => {
   })
 }
 
-const create_player = (blocks_to_collect, scene) => {
+const create_player = (blocks_to_collect, completed_callback, scene) => {
   const player = BABYLON.MeshBuilder.CreateBox('player', { width: 2, height: 3.28, depth: 0.25, faceUV: uvs, updatable: true }, scene)
   
   player.material                 = new BABYLON.StandardMaterial('player_mat',      scene)
@@ -55,12 +55,16 @@ const create_player = (blocks_to_collect, scene) => {
       
       const b = blocks_to_collect.indexOf(letter)
       
-      if (b <= current_block_to_collect)
+      if (b <= current_block_to_collect) {
         if (collected_blocks[letter]++ < 5)
           mesh.dispose()
 
         if (collected_blocks[letter] === 5)
           current_block_to_collect += 1
+
+          if (current_block_to_collect === 4) 
+          completed_callback()
+      }
     }
   }
 

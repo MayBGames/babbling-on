@@ -28,7 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
   
   const engine = new BABYLON.Engine(canvas, true, { stencil: true }, false)
   const scene  = create_scene(engine)
-  const me     = create_player(blocks_to_collect, scene)
 
   const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
@@ -46,19 +45,23 @@ window.addEventListener('DOMContentLoaded', () => {
     if (parseInt(ticks) > 0) {
       text1.text = ticks
     } else {
-      const text2 = new BABYLON.GUI.TextBlock();
+      text1.text = ticks
 
-      text2.text = 'THANK YOU FOR\nYOUR ASSISTANCE'
+      const text = new BABYLON.GUI.TextBlock();
 
-      text2.color = "red"
-      text2.fontSize = 100
-      text2.resizeToFit = true
+      text.text = 'THANK YOU FOR\nYOUR ASSISTANCE'
 
-      advancedTexture.addControl(text2)
+      text.color = "red"
+      text.fontSize = 100
+      text.resizeToFit = true
+
+      advancedTexture.addControl(text)
+
+      setTimeout(() => { engine.stopRenderLoop() }, 1000)
     }
   }
 
-  start_ticking(90, countdown_ticked, scene)
+  start_ticking(5, countdown_ticked, scene)
 
   const room = create_room(scene)
 
@@ -77,7 +80,23 @@ window.addEventListener('DOMContentLoaded', () => {
     room[b] = blocks[b]
 
   scene.ambientColor = new BABYLON.Color3(0.5, 0.5, 0.5)
-  
+
+  const collected_all_blocks = () => {
+    const text = new BABYLON.GUI.TextBlock();
+
+    text.text = 'WHERE ARE YOU?!'
+
+    text.color = "red"
+    text.fontSize = 150
+    text.resizeToFit = true
+
+    advancedTexture.addControl(text)
+
+    setTimeout(() => { engine.stopRenderLoop() }, 1000)
+  }
+
+  const me = create_player(blocks_to_collect, collected_all_blocks, scene)
+
   init_controls(engine, scene, me)
 
   scene.activeCamera = create_camera(canvas, scene, me)
@@ -85,8 +104,6 @@ window.addEventListener('DOMContentLoaded', () => {
   canvas.focus()
 
   create_point_lights(scene, me, room)
-
-  // me.onCollide = (mesh) => box.visibility = 0
 
   engine.runRenderLoop(() => scene.render())
 })
