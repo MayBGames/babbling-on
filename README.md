@@ -11,6 +11,12 @@ _"Whoa!"_ You say. _"I want to do that! How do I do that?"_
 
 Read on :sunglasses:
 
+### Heads up
+
+I'm learning most of this stuff as I go, so you will definitely see me implement something in a terrible way and then come back later and make it better.
+
+If you have any input, suggestions, or better ways to do anything you see in this repo please let me know!
+
 ### A new approach to teaching
 
 This is kind of a new concept for tutorials. Instead of using blog posts or a series of videos to teach game development with Babylon.js, this repo teaches using code, commit comments, a GitHub Project with task cards, and inline commit diff comments (_comments about specific lines in a commit - they're super awesome, you'll see :thumbsup:_).
